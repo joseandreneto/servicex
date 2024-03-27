@@ -1,4 +1,5 @@
-package br.com.andre.servicex.categoria.domain;
+package br.com.andre.servicex.ordemServico.domain;
+import br.com.andre.servicex.pagamento.domain.Pagamento;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,10 +13,15 @@ public class OrdemServico {
     @GeneratedValue
     @Column(name = "ID_ORDEM_SERVICO")
     private Integer idOrdemServico;
+
     @Column(name = "VALOR")
     private Double valorOrdemServico;
+
     @Column(name = "DATA_SOLICITACAO")
     private Date dataSolicitacao;
+
+    @OneToOne(mappedBy = "ordemServico")
+    private Pagamento pagamento;
 
     public OrdemServico() {
     }

@@ -1,8 +1,8 @@
-package br.com.andre.servicex.categoria.services;
+package br.com.andre.servicex.servico.services;
 
 
-import br.com.andre.servicex.categoria.domain.Servico;
-import br.com.andre.servicex.categoria.respositores.ServicoRepository;
+import br.com.andre.servicex.servico.domain.Servico;
+import br.com.andre.servicex.servico.repositores.ServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

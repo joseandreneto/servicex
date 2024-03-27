@@ -1,6 +1,6 @@
-package br.com.andre.servicex.categoria.respositores;
+package br.com.andre.servicex.servico.repositores;
 
-import br.com.andre.servicex.categoria.domain.Servico;
+import br.com.andre.servicex.servico.domain.Servico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

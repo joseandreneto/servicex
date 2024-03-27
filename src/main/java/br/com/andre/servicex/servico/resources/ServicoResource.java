@@ -1,7 +1,7 @@
-package br.com.andre.servicex.categoria.resources;
+package br.com.andre.servicex.servico.resources;
 
-import br.com.andre.servicex.categoria.domain.Servico;
-import br.com.andre.servicex.categoria.services.ServicoService;
+import br.com.andre.servicex.servico.domain.Servico;
+import br.com.andre.servicex.servico.services.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping (value = "/servicos")
 public class ServicoResource {
     @Autowired
-    private br.com.andre.servicex.categoria.services.ServicoService servicoService;
+    private ServicoService servicoService;
 
     @PostMapping
     public ResponseEntity<Servico> criarServico(@RequestBody Servico servico){

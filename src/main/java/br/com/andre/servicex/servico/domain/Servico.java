@@ -1,5 +1,7 @@
-package br.com.andre.servicex.categoria.domain;
+package br.com.andre.servicex.servico.domain;
 
+import br.com.andre.servicex.categoria.domain.Categoria;
+import br.com.andre.servicex.ordemServico.domain.OrdemServico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
