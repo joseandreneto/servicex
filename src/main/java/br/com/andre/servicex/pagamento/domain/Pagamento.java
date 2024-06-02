@@ -1,6 +1,5 @@
 package br.com.andre.servicex.pagamento.domain;
 
-import br.com.andre.servicex.pagamento.domain.StatusPagamento;
 import br.com.andre.servicex.ordemServico.domain.OrdemServico;
 import jakarta.persistence.*;
 
@@ -18,38 +17,47 @@ public abstract class Pagamento {
     @MapsId
     private OrdemServico ordemServico;
 
+
     public Pagamento(Integer idPagamento, StatusPagamento statusPagamento, OrdemServico ordemServico) {
         this.idPagamento = idPagamento;
         this.statusPagamento = (statusPagamento == null) ? null : statusPagamento.getCod();
         this.ordemServico = ordemServico;
     }
 
+
     public Pagamento() {
     }
+
 
     public Integer getIdPagamento() {
         return idPagamento;
     }
 
+
     public void setIdPagamento(Integer idPagamento) {
         this.idPagamento = idPagamento;
     }
+
 
     public StatusPagamento getStatusPagamento() {
         return StatusPagamento.toEnum(statusPagamento);
     }
 
+
     public void setStatusPagamento(StatusPagamento statusPagamento) {
         this.statusPagamento = statusPagamento.getCod();
     }
+
 
     public OrdemServico getOrdemServico() {
         return ordemServico;
     }
 
+
     public void setOrdemServico(OrdemServico ordemServico) {
         this.ordemServico = ordemServico;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -58,6 +66,7 @@ public abstract class Pagamento {
         Pagamento pagamento = (Pagamento) o;
         return Objects.equals(idPagamento, pagamento.idPagamento) && Objects.equals(statusPagamento, pagamento.statusPagamento) && Objects.equals(ordemServico, pagamento.ordemServico);
     }
+
 
     @Override
     public int hashCode() {

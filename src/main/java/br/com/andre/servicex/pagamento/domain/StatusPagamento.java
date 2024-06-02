@@ -10,8 +10,10 @@ public enum StatusPagamento {
     QUITADO(2, "Quitado"),
     CANCELADO(3, "Cancelado");
 
+
     private int cod;
     private String descricao;
+
 
     public static StatusPagamento toEnum(Integer cod){
         for (StatusPagamento pagamento : StatusPagamento.values()){

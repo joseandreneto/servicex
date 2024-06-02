@@ -1,25 +1,72 @@
 package br.com.andre.servicex.categoria.services;
 
 import br.com.andre.servicex.categoria.domain.Categoria;
-import br.com.andre.servicex.categoria.respositores.CategoriaRepository;
+import br.com.andre.servicex.categoria.domain.CategoriaDTO;
+import br.com.andre.servicex.categoria.domain.CategoriaDTOResponse;
+import br.com.andre.servicex.categoria.repositores.CategoriaRepository;
+import br.com.andre.servicex.exceptios.NomeCategoriaJaExistenteException;
+import br.com.andre.servicex.exceptios.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
+    public Categoria criarCategoria(Categoria categoria) {
+        if (categoriaRepository.existsByNomeCategoria(categoria.getNomeCategoria())) {
+            throw new NomeCategoriaJaExistenteException("Já existe uma categoria com esse nome");
+        }
+        categoria.setIdCategoria(null);
+        categoria.getNomeCategoria();
+        return categoriaRepository.save(categoria);
+    }
 
-    public Categoria criarCategoria(Categoria categoria) { return categoriaRepository.save(categoria); }
 
-    public List<Categoria> listarCategoria() { return categoriaRepository.findAll(); }
+    public Categoria buscarCategoriaPorId(Integer id){
+        Optional<Categoria> obj = categoriaRepository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrato! ID: " + id +
+                ", Tipo: " + Categoria.class.getName()));
+    }
 
-    public Optional<Categoria> buscarCategoria(Integer idCategoria) { return categoriaRepository.findById(idCategoria); }
 
-    public Categoria atualizarCategoria(Categoria categoria) { return categoriaRepository.save(categoria); }
+    public List<Categoria> listarCategorias() {
+        return categoriaRepository.findAll();
+    }
 
-    public void deletarCategoria(Integer idCategoria) { categoriaRepository.deleteById(idCategoria); }
+
+    public Categoria atualizarCategoria(Categoria categoria) {
+        Categoria novaCategoria = buscarCategoriaPorId(categoria.getIdCategoria());
+        updateData(novaCategoria, categoria);
+        return categoriaRepository.save(novaCategoria);
+    }
+
+
+    public void deletarCategoria(Integer idCategoria) {
+        categoriaRepository.deleteById(idCategoria);
+    }
+    public Categoria fromDTO(CategoriaDTO categoriaDTO){
+        return new Categoria(categoriaDTO.getIdCategoria(), categoriaDTO.getNomeCategoria());
+
+
+    }
+    public Categoria fromDTOResponse(CategoriaDTOResponse responseDTO) {
+        Categoria categoria = new Categoria();
+        categoria.setNomeCategoria(responseDTO.getNomeCategoria());
+        return categoria;
+    }
+
+
+    private void updateData(Categoria novaCategoria, Categoria categoria){
+        novaCategoria.setNomeCategoria(categoria.getNomeCategoria());
+    }
+
+
+
+
 }

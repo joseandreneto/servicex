@@ -2,6 +2,7 @@ package br.com.andre.servicex.servico.domain;
 
 import br.com.andre.servicex.categoria.domain.Categoria;
 import br.com.andre.servicex.ordemServico.domain.OrdemServico;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,21 +13,37 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "SERVICOS")
 public class Servico {
+
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_SERVICO")
     private Integer idServico;
-    @Column(name = "NOME_SERVICO")
-    private String nomeServico;
-    @Column(name = "VALOR_SERVICO")
+    @Column(name = "NOME")
+    private String nome;
+    @Column(name = "VALOR")
     private Double valor;
-    @ManyToOne(targetEntity = Categoria.class)
-    @JoinColumn(name = "idCategoria")
-    private List<Categoria> categoria;
-    @OneToMany
-    private List<OrdemServico> ordemServico;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "servicos")
+    private List<OrdemServico> ordemServicos;
+
+
+
+
+    public Servico(Integer idServico, String nome, Double valor, Categoria categoria) {
+        this.idServico = idServico;
+        this.nome = nome;
+        this.valor = valor;
+        this.categoria = categoria;
+    }
+
+
+
+
 }

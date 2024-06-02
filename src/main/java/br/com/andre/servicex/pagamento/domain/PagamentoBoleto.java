@@ -1,7 +1,5 @@
 package br.com.andre.servicex.pagamento.domain;
 
-import br.com.andre.servicex.pagamento.domain.Pagamento;
-import br.com.andre.servicex.pagamento.domain.StatusPagamento;
 import br.com.andre.servicex.ordemServico.domain.OrdemServico;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -20,6 +18,7 @@ import java.util.Date;
 @JsonTypeName("pagamentoBoleto")
 public class PagamentoBoleto extends Pagamento {
 
+
     @Column(name = "DATA_VENCIMENTO")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataVencimento;
@@ -27,11 +26,13 @@ public class PagamentoBoleto extends Pagamento {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataPagamento;
 
+
     public PagamentoBoleto(Integer idPagamento, StatusPagamento statusPagamento, OrdemServico ordemServico, Date dataVencimento, Date dataPagamento) {
         super(idPagamento, statusPagamento, ordemServico);
         this.dataVencimento = dataVencimento;
         this.dataPagamento = dataPagamento;
     }
+
 
     public PagamentoBoleto(Date dataVencimento, Date dataPagamento) {
         this.dataVencimento = dataVencimento;
